@@ -44,9 +44,9 @@ def find_directions(col, row, coins):
     elif col == 1 and row == 2: # (1,2)
         valid_directions = NORTH+EAST+SOUTH
         option = input("Pull a lever (y/n): ")
-        if option == "y":
+        if option == "y" or option == "Y":
             coins += 1
-        print("You received 1 coin, your total is now", coins)
+            print("You received 1 coin, your total is now {}.".format(coins))
     elif col == 1 and row == 3: # (1,3)
         valid_directions = EAST+SOUTH
     elif col == 2 and row == 1: # (2,1)
@@ -54,21 +54,21 @@ def find_directions(col, row, coins):
     elif col == 2 and row == 2: # (2,2)
         valid_directions = SOUTH+WEST
         option = input("Pull a lever (y/n): ")
-        if option == "y":
+        if option == "y" or option == "Y":
             coins += 1
-        print("You received 1 coin, your total is now", coins)
+            print("You received 1 coin, your total is now {}.".format(coins))
     elif col == 2 and row == 3: # (2,3)
         valid_directions = EAST+WEST
         option = input("Pull a lever (y/n): ")
-        if option == "y":
+        if option == "y" or option == "Y":
             coins += 1
-        print("You received 1 coin, your total is now", coins)
+            print("You received 1 coin, your total is now {}.".format(coins))
     elif col == 3 and row == 2: # (3,2)
         valid_directions = NORTH+SOUTH
         option = input("Pull a lever (y/n): ")
-        if option == "y":
+        if option == "y" or option == "Y":
             coins += 1
-        print("You received 1 coin, your total is now", coins)
+            print("You received 1 coin, your total is now {}.".format(coins))
     elif col == 3 and row == 3: # (3,3)
         valid_directions = SOUTH+WEST
     return valid_directions, coins
@@ -86,13 +86,14 @@ while not victory:
     direction = input("Direction: ")
     direction = direction.lower()
     
-    if not direction in valid_directions:
+    if direction not in valid_directions:
         print("Not a valid direction!")
+        print_directions(valid_directions)
     else:
         col, row = move(direction, col, row)
         victory = is_victory(col, row)
         if victory:
-            print("Victory! Total coins", coins)
+            print("Victory! Total coins {}.".format(coins))
         else:
             valid_directions, coins = find_directions(col, row, coins)
             print_directions(valid_directions)
