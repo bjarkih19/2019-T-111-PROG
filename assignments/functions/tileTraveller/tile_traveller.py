@@ -73,29 +73,38 @@ def find_directions(col, row, coins):
         valid_directions = SOUTH+WEST
     return valid_directions, coins
 
+
+def play():
 # The main program starts here
-victory = False
-row = 1
-col = 1
-coins = 0
+    victory = False
+    row = 1
+    col = 1
+    coins = 0
 
-valid_directions = NORTH
-print_directions(valid_directions)
+    valid_directions = NORTH
+    print_directions(valid_directions)
 
-while not victory:
-    direction = input("Direction: ")
-    direction = direction.lower()
-    
-    if direction not in valid_directions:
-        print("Not a valid direction!")
-        print_directions(valid_directions)
-    else:
-        col, row = move(direction, col, row)
-        victory = is_victory(col, row)
-        if victory:
-            print("Victory! Total coins {}.".format(coins))
-        else:
-            valid_directions, coins = find_directions(col, row, coins)
+    while not victory:
+        direction = input("Direction: ")
+        direction = direction.lower()
+        
+        if direction not in valid_directions:
+            print("Not a valid direction!")
             print_directions(valid_directions)
-            
+        else:
+            col, row = move(direction, col, row)
+            victory = is_victory(col, row)
+            if victory:
+                print("Victory! Total coins {}.".format(coins))
+            else:
+                valid_directions, coins = find_directions(col, row, coins)
+                print_directions(valid_directions)
+
+play()
+while True:
+    play_again = input("Play again (y/n): ")
+    if (play_again == "y" or play_again == "Y"):
+        play()
+    else:
+        break
         
